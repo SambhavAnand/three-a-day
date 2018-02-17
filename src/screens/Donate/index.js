@@ -3,6 +3,7 @@ import './styles.css';
 import Field from '../../components/Fields/index.js';
 import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
+import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 import {
   setFirstName,
@@ -31,8 +32,26 @@ class Donate extends React.Component {
     let allFieldsComplete = this.areAllFieldsComplete(nextProps);
     this.setState({allFieldsComplete:allFieldsComplete});
   }
+  componentWillUnmount() {
+    this.props.dispatch((resetAddDonatorStore()))
+  }
 
   areAllFieldsComplete = (nextProps) => {
+    let {
+      first_name,
+      last_name,
+      donator_type,
+      donator_addr_field,
+      donator_pin_code,
+      donator_phone_number,
+      no_meals,
+      people_per_meal
+    } = {...nextProps.donator};
+    return !!(first_name && last_name && donator_type && donator_addr_field && donator_pin_code && donator_pin_code && donator_phone_number && no_meals && people_per_meal);
+  }
+
+  handleSubmit = async() => {
+    this.setState({disabled: true});
     let {
       first_name,
       last_name,
@@ -43,8 +62,19 @@ class Donate extends React.Component {
       donator_phone_number,
       no_meals,
       people_per_meal
-    } = {...nextProps.donator};
-    return !!(first_name && last_name && donator_type && donator_addr_field && donator_pin_code && donator_pin_code && donator_phone_number && no_meals && people_per_meal);
+    } = {...this.props.donator};
+
+    await database.addDonator(
+      first_name,
+      last_name,
+      donator_type,
+      donator_addr_field,
+      donator_pin_code,
+      donator_phone_number,
+      no_meals,
+      people_per_meal,
+      restaurant_name
+    ).then(response => console.log('success', response)).catch(error => console.log(error))
   }
 
   render() {
@@ -149,10 +179,26 @@ class Donate extends React.Component {
                       dispatch={dispatch}
                       value={people_per_meal}
                   />
-                  <RaisedButton
-                    label="Submit"
-                    disabled={!this.state.allFieldsComplete}
-                  />
+                  {
+                    !this.state.disabled &&
+                      <RaisedButton
+                        label="Submit"
+                        disabled={!this.state.allFieldsComplete}
+                        onClick={this.handleSubmit}
+                      />
+                  }
+                  {
+                    this.state.disabled &&
+                    <RefreshIndicator
+                      size={40}
+                      left={10}
+                      top={0}
+                      status="loading"
+                      style={style.refresh}
+                    />
+
+                  }
+
                 </div>
               )
             }
@@ -168,6 +214,16 @@ Donate = connect(state => {
     }
 })(Donate);
 export default Donate;
+const style = {
+  container: {
+    position: 'relative',
+  },
+  refresh: {
+    display: 'inline-block',
+    position: 'relative',
+  },
+};
+
 
 /*
 <div className="form">

@@ -69,10 +69,11 @@ export default handleActions({
       last_name: null,
       donator_type: null,
       restaurant_name: null,
-      donator_addr_field1: null,
-      donator_addr_field2: null,
+      donator_addr_field: null,
       donator_pin_code: null,
-      donator_phone_number: null
+      donator_phone_number: null,
+      no_meals: null,
+      people_per_meal: null
     }),
 
 }, initialState )
