@@ -1,4 +1,7 @@
 import React from 'react';
+import Prompt from './subsections/prompt';
+import How from './subsections/how';
+import Why from './subsections/why';
 
 export default class Home extends React.Component {
 
@@ -8,7 +11,9 @@ export default class Home extends React.Component {
   render() {
     return (
       <div>
-        <p>Home Page</p>
+        <Prompt/>
+        <How/>
+        <Why/>
       </div>
     )
   }

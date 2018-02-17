@@ -1,0 +1,13 @@
+#prompt{
+    padding: 4%!important;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.prompt-button{
+  width:240px!important;
+  margin:3%!important;
+  margin-top:0%!important;
+  margin-bottom:0%!important;
+}

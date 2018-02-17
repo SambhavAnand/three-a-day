@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './headerStyles.css';
 export default class Header extends React.Component {
 
   constructor(props) {
@@ -7,8 +7,10 @@ export default class Header extends React.Component {
   }
   render() {
     return (
-      <div>
-        <p>This is the header</p>
+      <div className="nav">
+          <img src={require('../assets/logos/logo.png')} className="logo"/>
+          <h1>INSERT SLOGAN HERE</h1>
+          <span id="faux"> </span>
       </div>
     )
   }
