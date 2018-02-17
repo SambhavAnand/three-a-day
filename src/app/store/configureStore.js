@@ -1,12 +1,11 @@
 import {createStore, applyMiddleware} from 'redux';
 import rootReducer from '../reducers/rootReducer';
-import thunk from 'redux-thunk';
+
 import logger from 'redux-logger';
 
 export default function configureStore() {
 
     const middleWare = [
-        thunk,
     ];
 
     if (process.env.NODE_ENV === `development`) {
