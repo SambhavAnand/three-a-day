@@ -1,16 +1,19 @@
 import * as firebase from 'firebase';
 
-export const addRestaurant = (donator_name, address_field, pin_code, phone_number, no_meals, people_per_meal) => {
+export const addDonator = (first_name,last_name, donator_type, address_field, pin_code, phone_number, no_meals, people_per_meal, restaurant_name) => {
   return new Promise((resolve, reject) => {
-    let today = Date().now();
+    let today = Date.now();
     let todayRef = firebase.database().ref('donations/'+today);
     let no_donations = no_meals * people_per_meal;
     todayRef.push({
-      donator_name: donator_name,
+      first_name: first_name,
+      last_name: last_name,
+      donator_type: donator_type,
       address_field: address_field,
       pin_code: pin_code,
       phone_number: phone_number,
-      no_donations: no_donations
+      no_donations: no_donations,
+      restaurant_name: restaurant_name
     }).then(response => {
       todayRef.child(response.getKey()).update({id: response.getKey()});
       resolve(response.getKey());
