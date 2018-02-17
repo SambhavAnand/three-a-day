@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './App.css';
 
 import Main from './root/Main';
@@ -19,10 +21,12 @@ firebase.initializeApp(config);
 class App extends Component {
   render() {
     return (
+      <MuiThemeProvider>
       <div className="App">
         <Header/>
         <Main/>
       </div>
+      </MuiThemeProvider>
     );
   }
 }
