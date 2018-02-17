@@ -22,7 +22,7 @@ export const addDonator = (first_name,last_name, donator_type, address_field, pi
 }
 export const addCharity = (charity_name, address_field, pin_code, phone_number, no_orders) => {
   return new Promise((resolve, reject) => {
-    let today = Date().now();
+    let today = Date.now();
     let todayRef = firebase.database().ref('orders/'+today);
     todayRef.push({
       charity_name: charity_name,
