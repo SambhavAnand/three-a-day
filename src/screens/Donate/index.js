@@ -82,7 +82,7 @@ class Donate extends React.Component {
       people_per_meal,
       restaurant_name,
     ).then(response => {
-      this.setState({message: 'Success. You will get an email with further details. Redirected You To Home'});
+      this.setState({message: 'Success. You will get an email with further details. Redirecting You To Home'});
       setTimeout(()=> {
         this.props.dispatch(resetAddDonatorStore());
         this.props.history.push('/');

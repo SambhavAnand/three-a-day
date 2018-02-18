@@ -75,7 +75,7 @@ class Receive extends React.Component {
       charity_phone_number,
       no_of_people
     ).then(response => {
-        this.setState({message:"Success. You will get an email with further details. Redirected You To Home"});
+        this.setState({message:"Success. You will get an email with further details. Redirecting You To Home"});
         setTimeout(()=>{
           this.props.dispatch(resetAddCharityStore());
           this.props.history.push('/');
