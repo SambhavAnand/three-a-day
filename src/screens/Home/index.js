@@ -13,7 +13,6 @@ export default class Home extends React.Component {
       <div>
         <Prompt/>
         <How/>
-        <Why/>
       </div>
     )
   }
