@@ -3,7 +3,7 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    margin-top:1%!important;
+    background-color: #f1f8e9;
     height:50%!important;
 }
 .convince{

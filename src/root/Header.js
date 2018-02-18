@@ -8,8 +8,8 @@ export default class Header extends React.Component {
   render() {
     return (
       <div className="nav">
-          <img src={require('../assets/logos/logo.png')} className="logo"/>
-          <h1>INSERT SLOGAN HERE</h1>
+          <img src={require('../assets/logos/logo2.png')} className="logo"/>
+          <h1>Feeding the world</h1>
           <span id="faux"> </span>
       </div>
     )
