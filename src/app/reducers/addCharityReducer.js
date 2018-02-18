@@ -3,6 +3,7 @@ import { handleActions } from 'redux-actions';
 import {
   setFirstName,
   setLastName,
+  setCharityEmail,
   setCharityName,
   setCharityAddress,
   setCharityPinCode,
@@ -15,6 +16,7 @@ let initialState = {
     first_name: null,
     last_name: null,
     charity_name: null,
+    email:null,
     charity_addr: null,
     charity_pin_code: null,
     charity_phone_number: null,
@@ -34,6 +36,10 @@ export default handleActions({
     [setCharityName]: (state,action) => ({
       ...state,
       charity_name: action.payload
+    }),
+    [setCharityEmail]: (state, action) => ({
+      ...state,
+      email: action.payload
     }),
     [setCharityAddress]: ( state, action ) => ({
       ...state,
@@ -58,6 +64,7 @@ export default handleActions({
       charity_name: null,
       charity_addr: null,
       charity_pin_code: null,
+      email: null,
       charity_phone_number: null,
       no_of_people: null
     }),

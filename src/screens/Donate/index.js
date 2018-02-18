@@ -4,6 +4,7 @@ import Field from '../../components/Fields/index.js';
 import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
+import Snackbar from 'material-ui/Snackbar';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 import {
@@ -16,6 +17,7 @@ import {
   setDonatorPhoneNumber,
   setNoMeals,
   setPeoplePerMeal,
+  setDonatorEmail,
   resetAddDonatorStore
 } from '../../app/actions/addDonatorActions';
 import * as database from '../../utilities/database';
@@ -25,7 +27,8 @@ class Donate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      allFieldsComplete: false
+      allFieldsComplete: false,
+      message: null
     }
   }
 
@@ -46,9 +49,10 @@ class Donate extends React.Component {
       donator_pin_code,
       donator_phone_number,
       no_meals,
+      email,
       people_per_meal
     } = {...nextProps.donator};
-    return !!(first_name && last_name && donator_type && donator_addr_field && donator_pin_code && donator_pin_code && donator_phone_number && no_meals && people_per_meal);
+    return !!(first_name && last_name && donator_type && donator_addr_field &&email&& donator_pin_code && donator_pin_code && donator_phone_number && no_meals && people_per_meal);
   }
 
   handleSubmit = async() => {
@@ -57,6 +61,7 @@ class Donate extends React.Component {
       first_name,
       last_name,
       donator_type,
+      email,
       restaurant_name,
       donator_addr_field,
       donator_pin_code,
@@ -68,14 +73,21 @@ class Donate extends React.Component {
     await database.addDonation(
       first_name,
       last_name,
+      email,
       donator_type,
       donator_addr_field,
       donator_pin_code,
       donator_phone_number,
       no_meals,
       people_per_meal,
-      restaurant_name
-    ).then(response => console.log('success', response)).catch(error => console.log(error))
+      restaurant_name,
+    ).then(response => {
+      this.setState({message: 'Success. You will get an email with further details. Redirected You To Home'});
+      setTimeout(()=> {
+        this.props.dispatch(resetAddDonatorStore());
+        this.props.history.push('/');
+      },4000);
+    }).catch(error => this.setState({message: error.message, disabled:false}))
   }
 
   render() {
@@ -83,6 +95,7 @@ class Donate extends React.Component {
     let {
       first_name,
       last_name,
+      email,
       donator_type,
       restaurant_name,
       donator_addr_field,
@@ -92,10 +105,10 @@ class Donate extends React.Component {
       people_per_meal
     } = {...this.props.donator};
     return (
-        <div className="page flood">
-        <div className="form-holder">
+      <div className="page flood">
+      <div className="form-holder">
 
-            <h1>Thanks for sharing!</h1>
+            <h1>Share</h1>
             {
               !donator_type &&
               (
@@ -129,6 +142,14 @@ class Donate extends React.Component {
                         className="name-last"
                     />
                   </div>
+                  <Field
+                      value={email}
+                      label="Email"
+                      type="email"
+                      disabled={false}
+                      action={setDonatorEmail}
+                      dispatch={dispatch}
+                  />
                   <Field
                       value={donator_addr_field}
                       label="Address"
@@ -190,7 +211,7 @@ class Donate extends React.Component {
                       />
                   }
                   {
-                    this.state.disabled &&
+                    this.state.disabled && !this.state.message &&
                     <RefreshIndicator
                       size={40}
                       left={10}
@@ -205,6 +226,11 @@ class Donate extends React.Component {
               )
             }
           </div>
+          <Snackbar
+            open={this.state.message}
+            message={this.state.message}
+            onRequestClose={()=>this.setState({message:null})}
+          />
         </div>
     )
   }
@@ -225,52 +251,3 @@ const style = {
     position: 'relative',
   },
 };
-
-
-/*
-<div className="form">
-  <div className="name">
-    <Field
-        label="First"
-        value={this.props.donator.first_name}
-        type="text"
-        disabled={false}
-        dispatch={dispatch}
-        className="name-first"
-        action={setFirstName}
-    />
-    <Field
-        label="Last"
-        type="text"
-        disabled={false}
-        dispatch={dispatch}
-        className="name-last"
-    />
-  </div>
-  <Field
-      label="Address"
-      placeHolder="15W 10th St."
-      type="text"
-      disabled={false}
-      dispatch={dispatch}
-  />
-  <Field
-      label="Restaurant"
-      type="text"
-      disabled={false}
-      dispatch={dispatch}
-  />
-  <Field
-      label="Number of dishes"
-      type="number"
-      disabled={false}
-      dispatch={dispatch}
-  />
-  <Field
-      label="Number of people per dish"
-      type="number"
-      disabled={false}
-      dispatch={dispatch}
-  />
-</div>
-*/

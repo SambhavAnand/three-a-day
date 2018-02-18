@@ -4,6 +4,7 @@ import {
   setFirstName,
   setLastName,
   setDonatorType,
+  setDonatorEmail,
   setRestaurantName,
   setDonatorAddressField,
   setDonatorPinCode,
@@ -16,6 +17,7 @@ import {
 let initialState = {
     first_name: null,
     last_name: null,
+    email: null,
     donator_type: null,
     restaurant_name: null,
     donator_addr_field: null,
@@ -34,6 +36,10 @@ export default handleActions({
     [setLastName]: (state,action) => ({
       ...state,
       last_name: action.payload
+    }),
+    [setDonatorEmail]: (state, action)=>({
+      ...state,
+      email: action.payload
     }),
     [setDonatorType]: (state,action) => ({
       ...state,
@@ -73,6 +79,7 @@ export default handleActions({
       donator_pin_code: null,
       donator_phone_number: null,
       no_meals: null,
+      email: null,
       people_per_meal: null
     }),
 

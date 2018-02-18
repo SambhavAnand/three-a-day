@@ -5,6 +5,7 @@ import Field from '../../components/Fields/index.js';
 import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
+import Snackbar from 'material-ui/Snackbar';
 import * as database from '../../utilities/database';
 
 import {
@@ -15,6 +16,7 @@ import {
   setCharityPinCode,
   setCharityPhoneNumber,
   setNumberOfPeople,
+  setCharityEmail,
   resetAddCharityStore
 } from'../../app/actions/addCharityActions';
 
@@ -23,7 +25,8 @@ class Receive extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      allFieldsComplete: false
+      allFieldsComplete: false,
+      message: null
     }
   }
 
@@ -40,12 +43,13 @@ class Receive extends React.Component {
       first_name,
       last_name,
       charity_name,
+      email,
       charity_addr,
       charity_pin_code,
       charity_phone_number,
       no_of_people
     } = {...nextProps.charity};
-    return !!(first_name && last_name && charity_name && charity_addr && charity_pin_code  && charity_phone_number && no_of_people);
+    return !!(first_name && last_name && charity_name &&email&&charity_addr && charity_pin_code  && charity_phone_number && no_of_people);
   }
 
   handleSubmit = async() => {
@@ -54,6 +58,7 @@ class Receive extends React.Component {
       first_name,
       last_name,
       charity_name,
+      email,
       charity_addr,
       charity_pin_code,
       charity_phone_number,
@@ -63,12 +68,19 @@ class Receive extends React.Component {
     await database.addCharityRequest(
       first_name,
       last_name,
+      email,
       charity_name,
       charity_addr,
       charity_pin_code,
       charity_phone_number,
       no_of_people
-    ).then(response => console.log('success', response)).catch(error => console.log(error))
+    ).then(response => {
+        this.setState({message:"Success. You will get an email with further details. Redirected You To Home"});
+        setTimeout(()=>{
+          this.props.dispatch(resetAddCharityStore());
+          this.props.history.push('/');
+        }, 4000);
+      }).catch(error => this.setState({message: error.message, disabled: false}))
   }
 
   render() {
@@ -76,17 +88,17 @@ class Receive extends React.Component {
     let {
       first_name,
       last_name,
+      email,
       charity_name,
       charity_addr,
       charity_pin_code,
       charity_phone_number,
       no_of_people
     } = {...this.props.charity};
-    console.log('sav', this.props.charity)
     return (
-        <div className="page flood">
-        <div className="form-holder">
-            <h1>Get some food!</h1>
+      <div className="page flood">
+      <div className="form-holder">
+            <h1>Request food</h1>
             <div className="form">
               <div className="name">
                 <Field
@@ -108,6 +120,22 @@ class Receive extends React.Component {
                     className="name-last"
                 />
               </div>
+              <Field
+                value={email}
+                label="Email"
+                type="email"
+                disabled={false}
+                action={setCharityEmail}
+                dispatch={dispatch}
+              />
+              <Field
+                  label="Charity Name"
+                  type="text"
+                  disabled={false}
+                  value={charity_name}
+                  action={setCharityName}
+                  dispatch={dispatch}
+              />
               <Field
                   value={charity_addr}
                   label="Address"
@@ -132,14 +160,8 @@ class Receive extends React.Component {
                 action={setCharityPhoneNumber}
                 dispatch={dispatch}
               />
-              <Field
-                  label="Charity Name"
-                  type="text"
-                  disabled={false}
-                  value={charity_name}
-                  action={setCharityName}
-                  dispatch={dispatch}
-              />
+
+
               <Field
                   label="Number of People You Need Food for"
                   type="number"
@@ -157,7 +179,7 @@ class Receive extends React.Component {
                   />
               }
               {
-                this.state.disabled &&
+                this.state.disabled && !this.state.message &&
                 <RefreshIndicator
                   size={40}
                   left={10}
@@ -169,13 +191,21 @@ class Receive extends React.Component {
               }
 
             </div>
-</div>
+          </div>
+          <Snackbar
+            open={this.state.message}
+            message={this.state.message}
+            onRequestClose={()=>this.setState({message:null})}
+          />
+
         </div>
     )
   }
 }
 Receive = connect(state=>{
-  charity: state.charity
+  return {
+    charity: state.charity
+  }
 })(Receive);
 export default Receive;
 const style = {
