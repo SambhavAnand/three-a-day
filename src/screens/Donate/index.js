@@ -3,6 +3,7 @@ import './styles.css';
 import Field from '../../components/Fields/index.js';
 import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 import {
@@ -91,15 +92,17 @@ class Donate extends React.Component {
       people_per_meal
     } = {...this.props.donator};
     return (
-        <div className="page">
-            <h1>Donate some food!</h1>
+        <div className="page flood">
+        <div className="form-holder">
+
+            <h1>Thanks for sharing!</h1>
             {
               !donator_type &&
               (
                 <div>
-                  <h2>Are you a restaurant or an individual?</h2>
-                  <RaisedButton label="Restaurant" onClick={()=>dispatch(setDonatorType('restaurant'))}/>
-                  <RaisedButton label="Individual" onClick={()=>dispatch(setDonatorType('individual'))}/>
+                  <h2>Are you a <FlatButton label="Restaurant"  primary={true} onClick={()=>dispatch(setDonatorType('restaurant'))}/> or an
+                  <FlatButton label="Individual"  primary={true} onClick={()=>dispatch(setDonatorType('individual'))}/>?</h2>
+
                 </div>
               )
             }
@@ -202,7 +205,7 @@ class Donate extends React.Component {
                 </div>
               )
             }
-
+          </div>
         </div>
     )
   }

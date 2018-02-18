@@ -1,0 +1,12 @@
+.desc{
+      width: 50% !important;
+      text-align: left;
+      padding-left: 25%!important;
+      padding-right:25%!important;
+}
+.desc h1{
+  font-weight:300!important;
+}
+.desc p{
+  font-weight:300!important;
+}
