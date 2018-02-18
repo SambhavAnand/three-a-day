@@ -39,6 +39,9 @@ export default class Home extends React.Component {
   render() {
     return (
       <div className="full-page">
+            <div className="counter">
+                  <h1>45 meals served!</h1>
+            </div>
             <div className="prompt">
                   <div className="convince">
                         <h1>We Care About </h1>

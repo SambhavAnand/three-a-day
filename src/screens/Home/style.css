@@ -54,3 +54,16 @@ a{
 a:hover{
   cursor:pointer!important;
 }
+.counter{
+  height:50px;
+  width:100%!important;
+  color:white;
+  justify-content: center;
+  align-items: center;
+  background-color:#ff1744;
+}
+.counter h1{
+  margin:0%!important;
+  font-weight: 300;
+  padding-top:4px!important
+}
