@@ -92,7 +92,7 @@ class Donate extends React.Component {
       people_per_meal
     } = {...this.props.donator};
     return (
-        <div className="page flood">
+        <div className="page">
         <div className="form-holder">
 
             <h1>Thanks for sharing!</h1>
@@ -102,7 +102,6 @@ class Donate extends React.Component {
                 <div>
                   <h2>Are you a <FlatButton label="Restaurant"  primary={true} onClick={()=>dispatch(setDonatorType('restaurant'))}/> or an
                   <FlatButton label="Individual"  primary={true} onClick={()=>dispatch(setDonatorType('individual'))}/>?</h2>
-
                 </div>
               )
             }
