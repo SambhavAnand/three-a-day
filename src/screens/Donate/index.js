@@ -92,7 +92,7 @@ class Donate extends React.Component {
       people_per_meal
     } = {...this.props.donator};
     return (
-        <div className="page">
+        <div className="page flood">
         <div className="form-holder">
 
             <h1>Thanks for sharing!</h1>

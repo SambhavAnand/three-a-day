@@ -8,6 +8,11 @@
   justify-content: center;
   align-items: center;
 }
+.form-holder{
+  background-color: #fff!important;
+  border-radius:5px!important;
+  padding:40px!important;
+}
 
 .form{
   display:flex;
