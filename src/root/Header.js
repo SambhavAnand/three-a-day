@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import './headerStyles.css';
 export default class Header extends React.Component {
 
@@ -8,7 +9,7 @@ export default class Header extends React.Component {
   render() {
     return (
       <div className="nav">
-          <img src={require('../assets/logos/logo2.png')} className="logo"/>
+          <Link to="/"><img src={require('../assets/logos/logo2.png')} className="logo"/></Link>
           <h1>Feeding the world</h1>
           <span id="faux"> </span>
       </div>

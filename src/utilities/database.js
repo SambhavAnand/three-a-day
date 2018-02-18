@@ -9,7 +9,8 @@ export const addDonation = (first_name,last_name, email,donator_type, address_fi
     else if(hrs>11 && hrs < 17) node ='meal_three';
     else node="meal_one";
     let ref = firebase.database().ref('active/donations/'+node);
-    let no_donations = no_meals * people_per_meal;
+    let no_donations = parseInt(no_meals) * parseInt(people_per_meal);
+    if(!restaurant_name) restaurant_name = first_name + " " + last_name;
     ref.push({
       first_name: first_name,
       last_name: last_name,
@@ -44,7 +45,7 @@ export const addCharityRequest = (first_name, last_name, charity_email, charity_
       address_field: address_field,
       pin_code: pin_code,
       phone_number: phone_number,
-      no_orders: no_orders,
+      no_orders: parseInt(no_orders),
       date_sent: today.getTime()
     }).then(response => {
       ref.child(response.getKey()).update({id: response.getKey()});
