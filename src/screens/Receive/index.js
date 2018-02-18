@@ -84,7 +84,7 @@ class Receive extends React.Component {
     } = {...this.props.charity};
     console.log('sav', this.props.charity)
     return (
-        <div className="page flood">
+        <div className="page">
             <h1>Donate some food!</h1>
             <div className="form">
               <div className="name">
