@@ -64,7 +64,7 @@ class Donate extends React.Component {
       people_per_meal
     } = {...this.props.donator};
 
-    await database.addDonator(
+    await database.addDonation(
       first_name,
       last_name,
       donator_type,
