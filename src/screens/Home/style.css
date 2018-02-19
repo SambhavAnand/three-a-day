@@ -67,28 +67,6 @@ a:hover{
   font-weight: 300;
   padding-top:4px!important
 }
-<<<<<<< HEAD
-#button-d{
-  height:50px;
-  width:80%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size:22px!important;
-  font-weight:300!important;
-    background-color:#488fc8;
-    border:1px solid #488fc8;
-    border-radius:4px;
-    color:#fff
-
-}
-
-#button-d:hover{
-  background-color: #fff;
-  color:#488fc8;
-  cursor:pointer!important;
-=======
 
 .easyas h1{
   font-weight: 300;
@@ -136,5 +114,4 @@ text-transform: uppercase !important;
   border: #488FC8 solid 1px !important;
   background-color:#FFF !important;
   color:#488fc8 !important;
->>>>>>> 339958c438aea45688d741774a1ef1faf3f19b17
 }
