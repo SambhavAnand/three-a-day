@@ -67,3 +67,24 @@ a:hover{
   font-weight: 300;
   padding-top:4px!important
 }
+#button-d{
+  height:50px;
+  width:80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size:22px!important;
+  font-weight:300!important;
+    background-color:#488fc8;
+    border:1px solid #488fc8;
+    border-radius:4px;
+    color:#fff
+
+}
+
+#button-d:hover{
+  background-color: #fff;
+  color:#488fc8;
+  cursor:pointer!important;
+}

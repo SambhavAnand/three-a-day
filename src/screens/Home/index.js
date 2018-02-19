@@ -49,8 +49,8 @@ export default class Home extends React.Component {
                   </div>
                   <div className="buttons">
                       <h1>Make a change</h1>
-                      <RaisedButton label="Donate" primary={true} onClick={()=>{this.props.history.push("/donate")}}/>
-                      <RaisedButton label="Receive" primary={true} onClick={()=>{this.props.history.push("/receive")}}/>
+                      <button primary={true} onClick={()=>{this.props.history.push("/donate")}} id="button-d">Donate</button>
+                      <button primary={true} onClick={()=>{this.props.history.push("/receive")}} id="button-d">Receive</button>
                   </div>
             </div>
             <div className="what">
