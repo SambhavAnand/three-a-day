@@ -108,7 +108,7 @@ class Donate extends React.Component {
       <div className="page flood">
       <div className="form-holder">
 
-            <h1>Share</h1>
+            <h1>Share your food</h1>
             {
               !donator_type &&
               (
